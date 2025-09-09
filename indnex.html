@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seren Pay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --text-color: #343a40;
+            --heading-color: #212529;
+            --border-color: #dee2e6;
+            --card-background: #ffffff;
+            --background-light: #f8f9fa;
+            --background-dark: #e9ecef;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+        }
+
+        body.dark-mode {
+            --primary-color: #4da6ff;
+            --secondary-color: #adb5bd;
+            --text-color: #e9ecef;
+            --heading-color: #f8f9fa;
+            --border-color: #495057;
+            --card-background: #343a40;
+            --background-light: #212529;
+            --background-dark: #2c3136;
+            --shadow-light: rgba(0, 0, 0, 0.2);
+            --shadow-medium: rgba(0, 0, 0, 0.3);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--background-light);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        .container {
+            background: var(--card-background);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            max-width: 550px;
+            width: 100%;
+            text-align: center;
+            margin: 20px;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.5s, box-shadow 0.5s, border-color 0.5s;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px var(--shadow-light);
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--heading-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--border-color), rgba(0, 0, 0, 0));
+            margin: 30px 0;
+            transition: background-image 0.5s;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            color: var(--primary-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .description {
+            font-size: 1.05em;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+        }
+
+        .product-list {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .product-category {
+            margin-bottom: 20px;
+        }
+
+        .product-category h3 {
+            font-size: 1.4em;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .product-list ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .product-item {
+            display: flex;
+            flex-direction: column;
+            background: var(--background-dark);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+            flex-grow: 1;
+            box-shadow: 0 2px 5px var(--shadow-light);
+            min-width: 120px;
+            max-width: 180px;
+        }
+
+        .product-item p {
+            font-weight: 600;
+            margin: 0 0 10px 0;
+            color: var(--heading-color);
+        }
+        
+        .product-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .order-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .order-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .payment-method {
+            background: var(--background-dark);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            box-shadow: 0 6px 20px var(--shadow-medium);
+            transform: translateY(-3px);
+        }
+
+        .payment-method h3 {
+            font-size: 1.4em;
+            color: var(--heading-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .qr-code {
+            width: 220px;
+            height: auto;
+            border: 4px solid var(--primary-color);
+            padding: 8px;
+            border-radius: 10px;
+            margin-top: 15px;
+            background-color: var(--card-background);
+            box-shadow: 0 4px 15px var(--shadow-light);
+            transition: border-color 0.5s, background-color 0.5s;
+            cursor: pointer;
+        }
+
+        .dana-info {
+            background: var(--card-background);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px dashed var(--border-color);
+            box-shadow: inset 0 1px 3px var(--shadow-light);
+            transition: background-color 0.5s, border-color 0.5s;
+            cursor: pointer;
+        }
+
+        .dana-info p {
+            margin: 8px 0;
+            font-size: 1.1em;
+            color: var(--text-color);
+        }
+
+        .dana-info strong {
+            color: var(--heading-color);
+            font-weight: 600;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-background);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--shadow-light);
+            transition: background-color 0.5s, border-color 0.5s, transform 0.3s;
+            z-index: 1001;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-icon {
+            font-size: 24px;
+            color: var(--text-color);
+            transition: color 0.5s;
+        }
+
+        /* Modal/Pop-up Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: var(--card-background);
+            margin: auto;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            width: 80%;
+            max-width: 350px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--shadow-medium);
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+        }
+        
+        body.dark-mode .modal-content {
+            background-color: var(--card-background);
+        }
+
+        @keyframes animatetop {
+            from { top: -300px; opacity: 0 }
+            to { top: 0; opacity: 1 }
+        }
+
+        .close-btn {
+            color: var(--secondary-color);
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover, .close-btn:focus {
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-qr-img {
+            max-width: 90%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.4em;
+            }
+            .qr-code {
+                width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <span class="theme-icon">🌙</span>
+    </div>
+
+    <div id="qrisModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3 style="color:var(--heading-color);">Scan untuk Bayar</h3>
+        <img class="modal-qr-img" src="https://files.catbox.moe/2oxlzi.jpeg" alt="QRIS Code">
+      </div>
+    </div>
+
+    <div class="container">
+        <img src="https://files.catbox.moe/alwee1.png" alt="Logo Seren Pay" class="logo">
+        <h1>Seren Pay</h1>
+        
+        <hr>
+
+        <h2>Pilih Produk</h2>
+        <div class="product-list">
+            <div class="product-category">
+                <h3>SCRIPT</h3>
+                <ul>
+                    <li class="product-item">
+                        <p>TREDICT</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20SCRIPT%20-%20TREDICT.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>SOSCUS HEXA</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20SCRIPT%20-%20SOSCUS%20HEXA.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>WARRIORS</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20SCRIPT%20-%20WARRIORS.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="product-category">
+                <h3>PANEL</h3>
+                <ul>
+                    <li class="product-item">
+                        <p>1 GB</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20PANEL%20-%201%20GB.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>2 GB</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20PANEL%20-%202%20GB.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>3 GB</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20PANEL%20-%203%20GB.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>4 GB</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20PANEL%20-%204%20GB.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>5 GB</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20PANEL%20-%205%20GB.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>6 GB</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20PANEL%20-%206%20GB.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>7 GB</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20PANEL%20-%207%20GB.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>8 GB</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20PANEL%20-%208%20GB.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>9 GB</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20PANEL%20-%209%20GB.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>10 GB</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20PANEL%20-%2010%20GB.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>UNLIMITED</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20PANEL%20-%20UNLIMITED.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="product-category">
+                <h3>VPS</h3>
+                <ul>
+                    <li class="product-item">
+                        <p>RAM 1 GB CORE 1</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20VPS%20-%20RAM%201%20GB%20CORE%201.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>RAM 2 GB CORE 1</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20VPS%20-%20RAM%202%20GB%20CORE%201.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>RAM 4 GB CORE 2</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20VPS%20-%20RAM%204%20GB%20CORE%202.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>RAM 8 GB CORE 4</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20VPS%20-%20RAM%208%20GB%20CORE%204.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>RAM 16 GB CORE 4</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20VPS%20-%20RAM%2016%20GB%20CORE%204.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                    <li class="product-item">
+                        <p>RAM 16 GB CORE 8</p>
+                        <a href="https://t.me/Serenhope?text=Halo%2C%20saya%20ingin%20order%20produk%20VPS%20-%20RAM%2016%20GB%20CORE%208.%20Apakah%20ready%3F" target="_blank" class="order-btn">Order</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <h2>Metode Pembayaran</h2>
+        <p class="description">Silakan pilih metode pembayaran yang kamu inginkan untuk menyelesaikan transaksi.</p>
+        
+        <div class="payment-method">
+            <h3>QRIS (Semua E-Wallet & Bank)</h3>
+            <p>Klik gambar QRIS di bawah ini untuk melihat lebih jelas.</p>
+            <img class="qr-code" src="https://files.catbox.moe/2oxlzi.jpeg" alt="QRIS Code" onclick="openModal()">
+        </div>
+        
+        <div class="payment-method">
+            <h3>DANA</h3>
+            <p>Klik nomor di bawah ini untuk menyalin.</p>
+            <div class="dana-info" onclick="copyDanaNumber()">
+                <p><strong>Nomor DANA:</strong> <span id="danaNumber" style="color: var(--primary-color);">081318296708</span></p>
+                <p><strong>A/n:</strong> Seren</p>
+            </div>
+            <p id="copyMessage" style="display: none; color: green; font-weight: bold; margin-top: 10px;">Nomor DANA berhasil disalin!</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.querySelector('.theme-icon');
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeIcon.textContent = '🌙';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            const body = document.body;
+            const themeIcon = document.querySelector('.theme-icon');
+
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeIcon.textContent = '☀️';
+            } else {
+                body.classList.remove('dark-mode');
+                themeIcon.textContent = '🌙';
+            }
+        });
+
+        // --- JavaScript untuk Pop-up QRIS ---
+        const modal = document.getElementById("qrisModal");
+        const closeBtn = document.querySelector(".close-btn");
+
+        function openModal() {
+            modal.style.display = "flex";
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // --- JavaScript untuk Salin Nomor DANA ---
+        function copyDanaNumber() {
+            const danaNumber = document.getElementById("danaNumber").textContent;
+            navigator.clipboard.writeText(danaNumber).then(() => {
+                const copyMessage = document.getElementById("copyMessage");
+                copyMessage.style.display = "block";
+                setTimeout(() => {
+                    copyMessage.style.display = "none";
+                }, 2000); // Pesan akan hilang setelah 2 detik
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert('Gagal menyalin nomor. Silakan salin secara manual.');
+            });
+        }
+    </script>
+
+</body>
+</html>
