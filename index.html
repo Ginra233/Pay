@@ -4,36 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seren Pay</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #007bff;
-            --secondary-color: #6c757d;
-            --text-color: #343a40;
-            --heading-color: #212529;
-            --border-color: #dee2e6;
+            --primary-color: #5b50e6;
+            --primary-dark: #4b44bd;
+            --secondary-color: #8892a0;
+            --text-color: #2c3340;
+            --heading-color: #1a1f26;
+            --background-light: #f5f7fa;
             --card-background: #ffffff;
-            --background-light: #f8f9fa;
-            --background-dark: #e9ecef;
-            --shadow-light: rgba(0, 0, 0, 0.08);
-            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --border-color: #e3e6e9;
+            --shadow-light: rgba(22, 28, 45, 0.08);
+            --shadow-medium: rgba(22, 28, 45, 0.15);
         }
 
         body.dark-mode {
-            --primary-color: #4da6ff;
-            --secondary-color: #adb5bd;
-            --text-color: #e9ecef;
-            --heading-color: #f8f9fa;
-            --border-color: #495057;
-            --card-background: #343a40;
-            --background-light: #212529;
-            --background-dark: #2c3136;
+            --primary-color: #7b73f0;
+            --primary-dark: #635ac2;
+            --secondary-color: #9ea8b5;
+            --text-color: #e8eaf0;
+            --heading-color: #f1f3f8;
+            --background-light: #16161d;
+            --card-background: #21212c;
+            --border-color: #333340;
             --shadow-light: rgba(0, 0, 0, 0.2);
-            --shadow-medium: rgba(0, 0, 0, 0.3);
+            --shadow-medium: rgba(0, 0, 0, 0.35);
         }
-        
+
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -50,10 +51,10 @@
 
         .container {
             background: var(--card-background);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px var(--shadow-light);
-            max-width: 550px;
+            padding: 50px 40px;
+            border-radius: 28px;
+            box-shadow: 0 20px 60px var(--shadow-light);
+            max-width: 700px;
             width: 100%;
             text-align: center;
             margin: 20px;
@@ -62,199 +63,233 @@
         }
 
         .logo {
-            width: 120px;
+            width: 150px;
             height: auto;
             margin-bottom: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px var(--shadow-light);
+            border-radius: 20px;
+            box-shadow: 0 6px 18px var(--shadow-light);
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         h1 {
-            font-size: 2.2em;
+            font-size: 3em;
             color: var(--heading-color);
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             font-weight: 700;
+        }
+
+        .sub-heading {
+            font-size: 1.1em;
+            color: var(--secondary-color);
+            margin-bottom: 40px;
         }
 
         hr {
             border: 0;
             height: 1px;
             background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--border-color), rgba(0, 0, 0, 0));
-            margin: 30px 0;
+            margin: 50px 0;
             transition: background-image 0.5s;
         }
 
         h2 {
-            font-size: 1.6em;
+            font-size: 2.2em;
             color: var(--primary-color);
             margin-top: 30px;
-            margin-bottom: 15px;
-            font-weight: 600;
+            margin-bottom: 25px;
+            font-weight: 700;
+            position: relative;
         }
-
-        .description {
-            font-size: 1.05em;
-            color: var(--secondary-color);
-            margin-bottom: 30px;
+        h2::after {
+            content: '';
+            width: 70px;
+            height: 5px;
+            background-color: var(--primary-color);
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
         }
 
         .product-list {
             text-align: left;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .product-category {
-            margin-bottom: 20px;
+            margin-bottom: 35px;
         }
 
         .product-category h3 {
-            font-size: 1.4em;
+            font-size: 1.8em;
             color: var(--heading-color);
             border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 5px;
-            margin-bottom: 15px;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
             display: inline-block;
+            transition: color 0.5s, border-color 0.5s;
         }
 
         .product-list ul {
             list-style-type: none;
             padding: 0;
             margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
             justify-content: center;
         }
 
         .product-item {
             display: flex;
             flex-direction: column;
-            background: var(--background-dark);
-            padding: 15px;
-            border-radius: 8px;
+            background: var(--background-light);
+            padding: 20px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             text-align: center;
-            flex-grow: 1;
-            box-shadow: 0 2px 5px var(--shadow-light);
-            min-width: 120px;
-            max-width: 180px;
+            box-shadow: 0 6px 16px var(--shadow-light);
+        }
+        
+        .product-item:hover {
+            box-shadow: 0 12px 30px var(--shadow-medium);
+            transform: translateY(-8px);
+            background: var(--card-background);
+            border-color: var(--primary-color);
         }
 
         .product-item p {
             font-weight: 600;
-            margin: 0 0 10px 0;
+            margin: 0 0 18px 0;
             color: var(--heading-color);
-        }
-        
-        .product-item:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            transform: translateY(-2px);
+            flex-grow: 1;
         }
 
         .order-btn {
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
+            padding: 14px 20px;
+            border-radius: 12px;
             cursor: pointer;
             text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease;
             white-space: nowrap;
+            letter-spacing: 0.8px;
         }
 
         .order-btn:hover {
-            background-color: #0056b3;
+            background-color: var(--primary-dark);
+            transform: scale(1.03);
         }
 
         .payment-method {
-            background: var(--background-dark);
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 25px;
+            background: var(--background-light);
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 35px;
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
-
         .payment-method:hover {
-            box-shadow: 0 6px 20px var(--shadow-medium);
-            transform: translateY(-3px);
+            box-shadow: 0 12px 36px var(--shadow-medium);
+            transform: translateY(-6px);
         }
 
         .payment-method h3 {
-            font-size: 1.4em;
+            font-size: 2em;
             color: var(--heading-color);
             margin-top: 0;
-            margin-bottom: 15px;
-            font-weight: 600;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
 
         .qr-code {
-            width: 220px;
+            width: 300px;
+            max-width: 100%;
             height: auto;
-            border: 4px solid var(--primary-color);
-            padding: 8px;
-            border-radius: 10px;
-            margin-top: 15px;
+            border: 8px solid var(--primary-color);
+            padding: 12px;
+            border-radius: 18px;
+            margin-top: 20px;
             background-color: var(--card-background);
-            box-shadow: 0 4px 15px var(--shadow-light);
+            box-shadow: 0 8px 25px var(--shadow-light);
             transition: border-color 0.5s, background-color 0.5s;
             cursor: pointer;
+        }
+        .qr-code:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
         }
 
         .dana-info {
             background: var(--card-background);
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 15px;
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 25px;
             border: 1px dashed var(--border-color);
-            box-shadow: inset 0 1px 3px var(--shadow-light);
-            transition: background-color 0.5s, border-color 0.5s;
+            box-shadow: inset 0 2px 6px var(--shadow-light);
+            transition: all 0.4s ease;
             cursor: pointer;
+        }
+        .dana-info:hover {
+            background: var(--background-light);
+            border-color: var(--primary-color);
         }
 
         .dana-info p {
-            margin: 8px 0;
-            font-size: 1.1em;
+            margin: 10px 0;
+            font-size: 1.2em;
             color: var(--text-color);
+            font-weight: 500;
         }
 
         .dana-info strong {
             color: var(--heading-color);
+            font-weight: 700;
+        }
+
+        #copyMessage {
+            font-size: 0.9em;
+            color: #28a745;
             font-weight: 600;
+            margin-top: 10px;
+            transition: opacity 0.3s;
         }
 
         .theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 30px;
+            right: 30px;
             background: var(--card-background);
             border: 1px solid var(--border-color);
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 12px var(--shadow-light);
+            box-shadow: 0 6px 18px var(--shadow-light);
             transition: background-color 0.5s, border-color 0.5s, transform 0.3s;
             z-index: 1001;
+            font-size: 28px;
         }
-
         .theme-toggle:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
-
         .theme-icon {
-            font-size: 24px;
             color: var(--text-color);
             transition: color 0.5s;
         }
 
-        /* Modal/Pop-up Styles */
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -263,74 +298,109 @@
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             align-items: center;
             justify-content: center;
             text-align: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
-
+        .modal.is-visible {
+            display: flex;
+            opacity: 1;
+        }
         .modal-content {
             position: relative;
             background-color: var(--card-background);
-            margin: auto;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-            width: 80%;
-            max-width: 350px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px var(--shadow-medium);
-            animation-name: animatetop;
-            animation-duration: 0.4s;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 16px 48px var(--shadow-medium);
+            transform: scale(0.9);
+            transition: transform 0.4s ease;
+        }
+        .modal.is-visible .modal-content {
+            transform: scale(1);
         }
         
-        body.dark-mode .modal-content {
-            background-color: var(--card-background);
-        }
-
-        @keyframes animatetop {
-            from { top: -300px; opacity: 0 }
-            to { top: 0; opacity: 1 }
-        }
-
         .close-btn {
             color: var(--secondary-color);
-            font-size: 28px;
+            font-size: 40px;
             font-weight: bold;
             position: absolute;
-            top: 10px;
-            right: 20px;
+            top: 15px;
+            right: 25px;
             transition: color 0.3s;
         }
-
         .close-btn:hover, .close-btn:focus {
             color: var(--primary-color);
             text-decoration: none;
             cursor: pointer;
         }
-
         .modal-qr-img {
-            max-width: 90%;
+            max-width: 100%;
             height: auto;
-            margin-top: 10px;
+            margin-top: 20px;
+            border-radius: 12px;
+        }
+        .bukti-upload {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        .bukti-upload input[type="file"] {
+            display: none;
+        }
+        .custom-file-upload {
+            border: 2px dashed var(--border-color);
+            background-color: var(--background-light);
+            padding: 25px;
+            border-radius: 14px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            color: var(--secondary-color);
+            transition: all 0.4s ease;
+        }
+        .custom-file-upload:hover {
+            background-color: var(--card-background);
+            border-color: var(--primary-color);
+        }
+        .custom-file-upload img.preview {
+            max-width: 100%;
+            max-height: 250px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 3px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow-light);
+        }
+        .success-message {
+            margin-top: 15px;
+            font-size: 1.1em;
+            color: #28a745;
+            font-weight: 600;
         }
 
-        @media (max-width: 600px) {
+        /* Responsive Design */
+        @media (max-width: 768px) {
             .container {
                 padding: 30px 20px;
-                margin: 10px;
             }
-            h1 {
-                font-size: 1.8em;
+            .product-list ul {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
-            h2 {
-                font-size: 1.4em;
-            }
-            .qr-code {
-                width: 180px;
-            }
+        }
+        @media (max-width: 500px) {
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 2em; }
+            .theme-toggle { top: 20px; right: 20px; width: 50px; height: 50px; font-size: 24px; }
+            .logo { width: 120px; }
+            .qr-code { width: 250px; }
         }
     </style>
 </head>
@@ -342,19 +412,49 @@
 
     <div id="qrisModal" class="modal">
       <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <h3 style="color:var(--heading-color);">Scan untuk Bayar</h3>
+        <span class="close-btn" onclick="closeModal('qrisModal')">&times;</span>
+        <h3 style="color:var(--heading-color);">Scan QRIS untuk Bayar</h3>
         <img class="modal-qr-img" src="https://files.catbox.moe/2oxlzi.jpeg" alt="QRIS Code">
+      </div>
+    </div>
+
+    <div id="buktiModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('buktiModal')">&times;</span>
+            <h3 style="color:var(--heading-color);">Kirim Bukti Pembayaran</h3>
+            <p>Unggah bukti transfer Anda di sini.</p>
+            <div class="bukti-upload">
+                <label for="buktiFile" class="custom-file-upload">
+                    <p id="fileName">
+                        <i class="fas fa-cloud-upload-alt"></i> Klik untuk pilih file...
+                    </p>
+                    <img id="filePreview" class="preview" style="display: none;" src="#" alt="Preview Bukti Transfer">
+                </label>
+                <input type="file" id="buktiFile" accept="image/*" onchange="previewFile()">
+                <button class="order-btn" id="kirimBuktiBtn" style="display:none;" onclick="kirimBukti()">
+                    <i class="fab fa-telegram-plane"></i> Kirim ke Telegram
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('successModal')">&times;</span>
+        <h3 style="color:#28a745;"><i class="fas fa-check-circle"></i> Bukti Pembayaran Terkirim!</h3>
+        <p class="success-message">Terima kasih. Bukti transfer Anda sudah terkirim ke admin.</p>
+        <p style="color:red; font-weight:700;">PENTING: Pastikan bukti transfer yang Anda kirim adalah yang benar.</p>
       </div>
     </div>
 
     <div class="container">
         <img src="https://files.catbox.moe/alwee1.png" alt="Logo Seren Pay" class="logo">
         <h1>Seren Pay</h1>
+        <p class="sub-heading">Layanan terpercaya untuk kebutuhan script, panel, dan VPS.</p>
         
         <hr>
 
-        <h2>Pilih Produk</h2>
+        <h2><i class="fas fa-shopping-cart"></i> Pilih Produk</h2>
         <div class="product-list">
             <div class="product-category">
                 <h3>SCRIPT</h3>
@@ -455,17 +555,17 @@
         
         <hr>
         
-        <h2>Metode Pembayaran</h2>
+        <h2><i class="fas fa-wallet"></i> Metode Pembayaran</h2>
         <p class="description">Silakan pilih metode pembayaran yang kamu inginkan untuk menyelesaikan transaksi.</p>
         
         <div class="payment-method">
-            <h3>QRIS (Semua E-Wallet & Bank)</h3>
+            <h3><i class="fas fa-qrcode"></i> QRIS (Semua E-Wallet & Bank)</h3>
             <p>Klik gambar QRIS di bawah ini untuk melihat lebih jelas.</p>
-            <img class="qr-code" src="https://files.catbox.moe/2oxlzi.jpeg" alt="QRIS Code" onclick="openModal()">
+            <img class="qr-code" src="https://files.catbox.moe/2oxlzi.jpeg" alt="QRIS Code" onclick="openModal('qrisModal')">
         </div>
         
         <div class="payment-method">
-            <h3>DANA</h3>
+            <h3><i class="fas fa-university"></i> DANA</h3>
             <p>Klik nomor di bawah ini untuk menyalin.</p>
             <div class="dana-info" onclick="copyDanaNumber()">
                 <p><strong>Nomor DANA:</strong> <span id="danaNumber" style="color: var(--primary-color);">081318296708</span></p>
@@ -473,6 +573,10 @@
             </div>
             <p id="copyMessage" style="display: none; color: green; font-weight: bold; margin-top: 10px;">Nomor DANA berhasil disalin!</p>
         </div>
+
+        <button class="order-btn" style="width: 100%; margin-top: 20px;" onclick="openModal('buktiModal')">
+            <i class="fas fa-file-upload"></i> Kirim Bukti Pembayaran
+        </button>
     </div>
 
     <script>
@@ -480,49 +584,38 @@
             const body = document.body;
             const themeIcon = document.querySelector('.theme-icon');
             body.classList.toggle('dark-mode');
-
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-                themeIcon.textContent = '☀️';
-            } else {
-                localStorage.setItem('theme', 'light');
-                themeIcon.textContent = '🌙';
-            }
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeIcon.innerHTML = isDarkMode ? '&#x2600;&#xFE0E;' : '&#x1F319;'; /* Unicode for sun and moon */
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme');
             const body = document.body;
             const themeIcon = document.querySelector('.theme-icon');
-
             if (savedTheme === 'dark') {
                 body.classList.add('dark-mode');
-                themeIcon.textContent = '☀️';
+                themeIcon.innerHTML = '&#x2600;&#xFE0E;';
             } else {
                 body.classList.remove('dark-mode');
-                themeIcon.textContent = '🌙';
+                themeIcon.innerHTML = '&#x1F319;';
             }
         });
 
-        // --- JavaScript untuk Pop-up QRIS ---
-        const modal = document.getElementById("qrisModal");
-        const closeBtn = document.querySelector(".close-btn");
-
-        function openModal() {
-            modal.style.display = "flex";
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add("is-visible");
         }
 
-        function closeModal() {
-            modal.style.display = "none";
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove("is-visible");
         }
 
         window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove("is-visible");
             }
         }
 
-        // --- JavaScript untuk Salin Nomor DANA ---
         function copyDanaNumber() {
             const danaNumber = document.getElementById("danaNumber").textContent;
             navigator.clipboard.writeText(danaNumber).then(() => {
@@ -530,13 +623,59 @@
                 copyMessage.style.display = "block";
                 setTimeout(() => {
                     copyMessage.style.display = "none";
-                }, 2000); // Pesan akan hilang setelah 2 detik
+                }, 2000);
             }).catch(err => {
                 console.error('Failed to copy text: ', err);
                 alert('Gagal menyalin nomor. Silakan salin secara manual.');
             });
         }
-    </script>
+        
+        let uploadedFile = null;
 
+        function previewFile() {
+            const fileInput = document.getElementById('buktiFile');
+            const file = fileInput.files[0];
+            const filePreview = document.getElementById('filePreview');
+            const fileName = document.getElementById('fileName');
+            const kirimBtn = document.getElementById('kirimBuktiBtn');
+
+            if (file) {
+                uploadedFile = file;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    filePreview.src = e.target.result;
+                    filePreview.style.display = 'block';
+                    fileName.textContent = file.name;
+                    kirimBtn.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                uploadedFile = null;
+                filePreview.style.display = 'none';
+                fileName.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Klik untuk pilih file...';
+                kirimBtn.style.display = 'none';
+            }
+        }
+
+        function kirimBukti() {
+            if (!uploadedFile) {
+                alert('Mohon unggah bukti pembayaran terlebih dahulu.');
+                return;
+            }
+
+            const username = "Serenhope";
+            const message = `Halo, saya ingin konfirmasi pembayaran.\n\nBerikut bukti transfer saya:`;
+            const telegramUrl = `https://t.me/${username}?text=${encodeURIComponent(message)}`;
+
+            closeModal('buktiModal');
+            openModal('successModal');
+            
+            // Memberikan sedikit jeda sebelum membuka Telegram agar notifikasi terlihat
+            setTimeout(() => {
+                window.open(telegramUrl, '_blank');
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
+
